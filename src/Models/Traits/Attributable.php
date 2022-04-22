@@ -19,14 +19,9 @@ trait Attributable
     parent::boot();
   }
 
-  /**
-   * The "booted" method of the model.
-   *
-   * @return void
-   */
-  protected static function booted($model)
+  protected function initializeAttributable()
   {
-    dd($model);
+    dd($this);
   }
 
   /** Get connected variable values.
