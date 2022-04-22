@@ -1,0 +1,33 @@
+{
+    "name": "neon/attributables",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Balázs Ercsey",
+        "email": "balazs.ercsey@elementary-interactive.com"
+      }
+    ],
+    "autoload": {
+      "psr-4": {
+        "Neon\\": "src/"
+      }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "Neon\\Tests\\": "tests/"
+      }
+    },
+    "require": {
+      "php": ">=8.0",
+      "laravel/framework": ">=9.0",
+      "neon/model-uuid": "^1.0"
+    },
+    "repositories": [
+      
+    ],
+    "branch-alias": {
+      
+    }
+  }
