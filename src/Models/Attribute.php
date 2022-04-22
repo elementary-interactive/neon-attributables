@@ -1,6 +1,6 @@
 <?php
 
-namespace Neon\Models;
+namespace Neon\Attributables\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;

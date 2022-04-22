@@ -1,6 +1,6 @@
 <?php
 
-namespace Neon\Models\Traits;
+namespace Neon\Attributables\Models\Traits;
 
 /** 
  
