@@ -17,11 +17,17 @@ trait Attributable
     /** We MUST call the parent boot...
      */
     parent::boot();
-
-    dd($this);
   }
 
-
+  /**
+   * The "booted" method of the model.
+   *
+   * @return void
+   */
+  protected static function booted($model)
+  {
+    dd($model);
+  }
 
   /** Get connected variable values.
    * 
