@@ -11,6 +11,7 @@ use Neon\Attributables\Models\Attribute;
  */
 trait Attributable
 {
+  protected $attributables = [];
 
   /** Extending the boot, to ...
    */
@@ -23,10 +24,22 @@ trait Attributable
 
   protected function initializeAttributable()
   {
-    $arrtibutes = Attribute::where('class', '=', self::class)->get();
+    $this->$attributables = (array) Attribute::where('class', '=', self::class)->get();
 
-    dd(self::class, $arrtibutes);
+    /**
+     * @todo Caching. Cache can store the result, and very easily could be
+     * re-generated if the attributes created or updated related to the 
+     * given class.
+     */
+
+    foreach ($this->attributables as $attribute)
+    {
+      $this->attributes[$attribute->slug] = $attribute;
+    }
+    dd($this);
   }
+
+
 
   /** Get connected variable values.
    * 
