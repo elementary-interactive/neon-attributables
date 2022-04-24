@@ -2,6 +2,8 @@
 
 namespace Neon\Attributables\Models\Traits;
 
+use Neon\Attributables\Models\Attribute;
+
 /** 
  
  * 
@@ -21,7 +23,9 @@ trait Attributable
 
   protected function initializeAttributable()
   {
-    dd($this);
+    $arrtibutes = Attribute::where('class', '=', self::class)->get();
+
+    dd(self::class, $arrtibutes);
   }
 
   /** Get connected variable values.
