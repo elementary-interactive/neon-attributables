@@ -17,12 +17,6 @@ trait Attributable
 
   protected $attributable_records = [];
 
-  // protected $dispatchesEvents = [
-  //   'saved'     => \Neon\Attributables\Events\Changed::class,
-  //   'deleted'   => \Neon\Attributables\Events\Changed::class,
-  // ];
-
-
   /** Extending the boot, to ...
    */
   protected static function boot()
@@ -32,9 +26,7 @@ trait Attributable
     parent::boot();
 
     static::saving(function ($model) {
-      echo 'event::saving';
-      
-      $model->attributeValues()->detach();
+      $model->attributeValues()->delete();
 
       foreach ($model->attributables as $key => $attribute)
       {
@@ -50,15 +42,23 @@ trait Attributable
     });
 
     static::saved(function ($model) {
-      echo 'ecent::saved';
-      $model->attributeValues()->save($model->attributable_records);
-      dd($model);
+      
+      /** Save all variables.
+       * 
+       */
+      foreach ($model->attributable_records as $key => $record)
+      {
+        $model->attributeValues()->save($record);
+        
+        unset($model->attributable_records[$key]);
+      }
     });
 
     static::retrieved(function ($model) {
-      echo 'event::retrieved';
-      $x = $model->extendedAttributes;
-      // dd($x);
+      foreach ($model->attributeValues as $attributeValue)
+      {
+        $model->setAttribute($attributeValue->attribute->slug, $attributeValue->value);
+      }
     });
   }
 
@@ -99,7 +99,7 @@ trait Attributable
    */
   public function attributeValues()
   {
-    return $this->morphTo(AttributeValue::class, 'attributable')
+    return $this->morphMany(AttributeValue::class, 'attributable')
       ->with('attribute');
   }
 }
