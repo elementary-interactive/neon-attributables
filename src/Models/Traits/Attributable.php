@@ -51,10 +51,7 @@ trait Attributable
 
     static::saved(function ($model) {
       echo 'ecent::saved';
-      foreach ($model->attributable_records as $record)
-      {
-        $record->models()->save($model);
-      }
+      $model->attributeValues()->save($model->attributable_records);
       dd($model);
     });
 
