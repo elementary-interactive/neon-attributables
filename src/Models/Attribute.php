@@ -25,7 +25,7 @@ class Attribute extends EloquentModel
     /** We getting only the valid variable values, that are published and
      * not yet expired.
      */
-    return $this->hasMany(\Neon\Models\AttributeValue::class);
+    return $this->hasMany(\Neon\Attributables\Models\AttributeValue::class);
     /** REMOVED - as no way to handle these. */
     // ->where('published_at', '<', now())
     // ->whereNull('expire_at');

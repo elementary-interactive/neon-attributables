@@ -33,7 +33,12 @@ class AttributeValue extends EloquentModel
   /** */
   public function attribute()
   {
-    return $this->belongsTo(\Neon\Models\Attribute::class);
+    return $this->belongsTo(\Neon\Attributables\Models\Attribute::class);
+  }
+
+  public function models()
+  {
+    return $this->morphTo();
   }
 
   public function getValueAttribute()
