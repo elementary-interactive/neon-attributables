@@ -36,7 +36,7 @@ class AttributeValue extends EloquentModel
     return $this->belongsTo(\Neon\Attributables\Models\Attribute::class);
   }
 
-  public function models()
+  public function attributable()
   {
     return $this->morphTo();
   }
