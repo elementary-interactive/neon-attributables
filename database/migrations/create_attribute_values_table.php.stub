@@ -41,7 +41,8 @@ class CreateAttributeValuesTable extends Migration
       $table->index([
         'attributable_type',
         'attributable_id'
-      ])
+      ]);
+      $table->index('deleted_at');
     });
   }
 
