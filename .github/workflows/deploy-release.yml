@@ -10,7 +10,7 @@ jobs:
       - name: git-sync
         uses: wei/git-sync@v3
         with:
-          source_repo: "elementary-interactive/neon-attributable-dev"
+          source_repo: "${{ secrets.REPOSITORY_DEV }}"
           source_branch: "release"
-          destination_repo: "elementary-interactive/neon-attributable"
+          destination_repo: "${{ secrets.REPOSITORY_LIVE }}"
           destination_branch: "main"
