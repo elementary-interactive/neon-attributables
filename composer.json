@@ -3,6 +3,10 @@
   "description": "",
   "type": "library",
   "license": "MIT",
+  "support": {
+    "issues": "https://github.com/elementary-interactive/neon-attributables/issues",
+    "source": "https://github.com/elementary-interactive/neon-attributables"
+  },
   "authors": [
     {
       "name": "Balázs Ercsey",
@@ -32,11 +36,7 @@
     "neon/model-uuid": "^1.0"
   },
   "repositories": [],
-  "branch-alias": {},
-  "scripts": {
-    "post-package-update": [
-        "@php artisan vendor:publish --provider=\"Neon\\Attributables\\NeonAttributableServiceProvider\""
-    ]
+  "branch-alias": {}
 }
 
 }
