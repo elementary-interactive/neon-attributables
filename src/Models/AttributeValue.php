@@ -18,8 +18,7 @@ class AttributeValue extends EloquentModel
    * @var array
    */
   protected $fillable = [
-    'value',
-    'published_at',
+    'value'
   ];
 
   /** The attributes that should be handled as date or datetime.
@@ -27,7 +26,7 @@ class AttributeValue extends EloquentModel
    * @var array
    */
   protected $dates = [
-    'created_at', 'updated_at', 'deleted_at', 'published_at', 'expired_at',
+    'created_at', 'updated_at', 'deleted_at',
   ];
 
   /** */

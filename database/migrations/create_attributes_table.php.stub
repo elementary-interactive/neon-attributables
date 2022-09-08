@@ -36,6 +36,7 @@ class CreateAttributesTable extends Migration
 
       $table->primary('id');
       $table->index('class');
+      $table->index('deleted_at');
     });
   }
 

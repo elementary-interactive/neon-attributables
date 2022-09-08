@@ -26,8 +26,5 @@ class Attribute extends EloquentModel
      * not yet expired.
      */
     return $this->hasMany(\Neon\Attributables\Models\AttributeValue::class);
-    /** REMOVED - as no way to handle these. */
-    // ->where('published_at', '<', now())
-    // ->whereNull('expire_at');
   }
 }

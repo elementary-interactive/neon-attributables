@@ -26,32 +26,19 @@ trait Attributable
     parent::boot();
 
     static::saving(function ($model) {
-      $model->attributeValues()->delete();
+      // $model->attributeValues()->delete();
 
-      foreach ($model->attributables as $key => $attribute)
-      {
+      // foreach ($model->attributables as $key => $attribute)
+      // {
 
-        $value = new AttributeValue([
-          'value'     => $model->attributes[$key],
-        ]);
+      //   $value = new AttributeValue([
+      //     'value'     => $model->attributes[$key],
+      //   ]);
         
-        $model->attributable_records[] = Attribute::find($attribute['id'])->values()->save($value);
+      //   $model->attributable_records[] = Attribute::find($attribute['id'])->values()->save($value);
         
-        unset($model->attributes[$key]);
-      }
-    });
-
-    static::saved(function ($model) {
-      
-      /** Save all variables.
-       * 
-       */
-      foreach ($model->attributable_records as $key => $record)
-      {
-        $model->attributeValues()->save($record);
-        
-        unset($model->attributable_records[$key]);
-      }
+      //   unset($model->attributes[$key]);
+      // }
     });
 
     static::retrieved(function ($model) {
@@ -99,7 +86,11 @@ trait Attributable
    */
   public function attributeValues()
   {
-    return $this->morphMany(AttributeValue::class, 'attributable')
-      ->with('attribute');
+    return $this->belongsToMany(Attribute::class, AttributeValue::class)
+      ->withPivotValue('attributable_type', static::class)
+      ->withPivot('attributable_id')
+      ->withPivot('value')
+      ->withSoftDeletes()
+      ->withTimestamps();
   }
 }
