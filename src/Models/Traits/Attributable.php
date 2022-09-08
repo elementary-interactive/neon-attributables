@@ -90,7 +90,7 @@ trait Attributable
       ->withPivotValue('attributable_type', static::class)
       ->withPivot('attributable_id')
       ->withPivot('value')
-      ->withSoftDeletes()
+      // ->withSoftDeletes()
       ->withTimestamps();
   }
 }
