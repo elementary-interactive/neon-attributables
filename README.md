@@ -34,3 +34,10 @@ class AwesomeModel extends Model
 
 }
 ```
+<!-- ## How It Works?
+
+It's so easy basically. The "variables", a.k.a. attributes stored in database in the `attributes` table. -->
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
