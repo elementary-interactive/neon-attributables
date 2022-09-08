@@ -32,5 +32,11 @@
     "neon/model-uuid": "^1.0"
   },
   "repositories": [],
-  "branch-alias": {}
+  "branch-alias": {},
+  "scripts": {
+    "post-package-update": [
+        "@php artisan vendor:publish --provider=\"Neon\\Attributables\\NeonAttributableServiceProvider\" --tag=\"migrations\""
+    ]
+}
+
 }
