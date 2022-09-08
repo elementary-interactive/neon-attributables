@@ -9,6 +9,10 @@ Easily install the composer package:
 ```
 composer require neon/attributable
 ```
+Then you should install database migrations by:
+```
+php artisan vendor:publish --provider=\"Neon\\Attributables\\NeonAttributableServiceProvider\"
+```
 
 ## Usage
 Just use the Trait like othes:
