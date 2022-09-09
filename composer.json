@@ -4,8 +4,8 @@
   "type": "library",
   "license": "MIT",
   "support": {
-    "issues": "https://github.com/elementary-interactive/neon-attributable/issues",
-    "source": "https://github.com/elementary-interactive/neon-attributable"
+    "issues": "https://github.com/elementary-interactive/neon-attributables/issues",
+    "source": "https://github.com/elementary-interactive/neon-attributables"
   },
   "authors": [
     {
