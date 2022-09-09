@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * 
  * @author: Balázs Ercsey <balazs.ercsey@elementary-interactive.com>
  */
-trait Attributable
+trait Attributables
 {
   protected $attributables = [];
 
