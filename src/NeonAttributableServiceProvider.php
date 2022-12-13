@@ -4,7 +4,7 @@ namespace Neon\Attributables;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
-use Neon\Site\Console\AttributablesClearCommand;
+use Neon\Attributables\Console\AttributablesClearCommand;
 
 class NeonAttributableServiceProvider extends ServiceProvider
 {
