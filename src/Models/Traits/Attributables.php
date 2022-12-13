@@ -58,7 +58,11 @@ trait Attributables
     });
 
     static::retrieved(function ($model) {
-      foreach ($model->attributeValues as $attributeValue)
+      if (!Cache::has('neon-aval-'.$model->id)) {
+        $attributeValues = Cache::tags(['neon-attributes'])
+          ->remember('neon-aval-'.$model->id, $now->addMinutes(5), $model->attributeValues);
+      }
+      foreach ($attributeValues as $attributeValue)
       {
         $model->setAttribute($attributeValue->attribute->slug, $attributeValue->value);
       }
