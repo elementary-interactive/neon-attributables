@@ -1,6 +1,6 @@
 <?php
 
-namespace Neon\Site\Console;
+namespace Neon\Attributables\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
