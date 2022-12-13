@@ -4,6 +4,7 @@ namespace Neon\Attributables\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Support\Facades\Artisan;
 
 use Neon\Models\Traits\Uuid;
 
@@ -19,6 +20,20 @@ class Attribute extends EloquentModel
   protected $dates = [
     'created_at', 'updated_at', 'deleted_at'
   ];
+
+  protected static function boot()
+  {
+    /** We MUST call the parent boot...
+     */
+    parent::boot();
+
+    static::saved(function ($model) {
+      /**
+       * Clean up cache.
+       */
+      Artisan::call('attributes:clear');
+    });
+  }
 
   public function values()
   {
