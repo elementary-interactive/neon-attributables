@@ -5,6 +5,9 @@ namespace Neon\Attributables\Models\Traits;
 use Neon\Attributables\Models\Attribute;
 use Neon\Attributables\Models\AttributeValue;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Str;
+
 
 /** 
  
@@ -64,7 +67,17 @@ trait Attributables
 
   protected function initializeAttributable()
   {
-    $attributables = Attribute::where('class', '=', self::class)->get();
+    if (Cache::has('neon-attr-'.Str::slug(self::class)))
+    {
+      $attributables = Cache::get('neon-attr-'.Str::slug(self::class));
+    }
+    else
+    {
+      $attributables = Attribute::where('class', '=', self::class)->get();
+
+      Cache::tags('neon-attributes')
+        ->put('neon-attr-'.Str::slug(self::class), $attributables);
+    }
 
     /**
      * @todo Caching. Cache can store the result, and very easily could be
