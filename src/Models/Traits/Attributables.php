@@ -61,8 +61,10 @@ trait Attributables
       echo 'retrieved';
       if (!Cache::has('neon-aval-'.$model->id)) {
         echo 'neon-aval-'.$model->id. ' --- nincs cache';
-        $attributeValues = Cache::tags(['neon-attributes'])
+        Cache::tags(['neon-attributes'])
           ->put('neon-aval-'.$model->id, $model->attributeValues, now()->addMinutes(5));
+
+          dd($model->attributeValues, Cache::get('neon-aval-'.$model->id));
       }
       
       $attributeValues = Cache::get('neon-aval-'.$model->id);
