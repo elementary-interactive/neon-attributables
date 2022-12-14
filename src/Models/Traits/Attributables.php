@@ -61,8 +61,9 @@ trait Attributables
       echo 'retrieved';
       if (!Cache::has('neon-aval-'.$model->id)) {
         echo 'neon-aval-'.$model->id. ' --- nincs cache';
-        Cache::tags(['neon-attributes'])
-          ->put('neon-aval-'.$model->id, $model->attributeValues, now()->addMinutes(5));
+        // Cache::tags(['neon-attributes'])
+        //   ->
+        Cache::put('neon-aval-'.$model->id, $model->attributeValues, now()->addMinutes(5));
 
           dd($model->attributeValues, Cache::get('neon-aval-'.$model->id));
       }
@@ -83,8 +84,9 @@ trait Attributables
     {
       echo ' --- nincs cache';
       
-      Cache::tags(['neon-attributes'])
-        ->put(
+      // Cache::tags(['neon-attributes'])
+      //   ->
+      Cache::put(
           'neon-attr-'.Str::slug(self::class),
           Attribute::where('class', '=', self::class)->get(),
           now()->addHours(1)
