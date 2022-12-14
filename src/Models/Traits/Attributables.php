@@ -60,7 +60,7 @@ trait Attributables
     static::retrieved(function ($model) {
       if (!Cache::has('neon-aval-'.$model->id)) {
         $attributeValues = Cache::tags(['neon-attributes'])
-          ->remember('neon-aval-'.$model->id, $now->addMinutes(5), $model->attributeValues);
+          ->remember('neon-aval-'.$model->id, now()->addMinutes(5), $model->attributeValues);
       }
       foreach ($attributeValues as $attributeValue)
       {
