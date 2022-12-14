@@ -58,16 +58,16 @@ trait Attributables
     });
 
     static::retrieved(function ($model) {
-      if (!Cache::has('neon-aval-'.$model->id)) {
+      if (!Cache::tags(['neon-attributes'])->has('neon-aval-'.$model->id)) {
         Cache::tags(['neon-attributes'])
-          ->add(
+          ->put(
               'neon-aval-'.$model->id,
               $model->attributeValues,
               now()->addMinutes(2)
             );
       }
       
-      $attributeValues = Cache::get('neon-aval-'.$model->id);
+      $attributeValues = Cache::tags(['neon-attributes'])->get('neon-aval-'.$model->id) ?? $model->attributeValues;
       
       foreach ($attributeValues as $attributeValue)
       {
@@ -78,17 +78,17 @@ trait Attributables
 
   protected function initializeAttributable()
   {
-    if (!Cache::has('neon-attr-'.Str::slug(self::class)))
+    if (!Cache::tags(['neon-attributes'])->has('neon-attr-'.Str::slug(self::class)))
     {
       Cache::tags(['neon-attributes'])
-        ->add(
+        ->put(
             'neon-attr-'.Str::slug(self::class),
             Attribute::where('class', '=', self::class)->get(),
             now()->addMinutes(2)
           );
     }
 
-    $attributables = Cache::get('neon-attr-'.Str::slug(self::class));
+    $attributables = Cache::tags(['neon-attributes'])->get('neon-attr-'.Str::slug(self::class));
 
     /**
      * @todo Caching. Cache can store the result, and very easily could be
