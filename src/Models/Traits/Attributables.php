@@ -62,12 +62,10 @@ trait Attributables
       if (!Cache::has('neon-aval-'.$model->id)) {
         echo 'neon-aval-'.$model->id. ' --- nincs cache';
         $attributeValues = Cache::tags(['neon-attributes'])
-          ->remember('neon-aval-'.$model->id, now()->addMinutes(5), function() use ($model) {
-            return $model->attributeValues;
-          });
-      } else {
-        $attributeValues = Cache::get('neon-aval-'.$model->id);
+          ->put('neon-aval-'.$model->id, $model->attributeValues, now()->addMinutes(5));
       }
+      
+      $attributeValues = Cache::get('neon-aval-'.$model->id);
       
       foreach ($attributeValues as $attributeValue)
       {
@@ -79,19 +77,19 @@ trait Attributables
   protected function initializeAttributable()
   {
     echo 'neon-attr-'.Str::slug(self::class);
-    if (Cache::has('neon-attr-'.Str::slug(self::class)))
-    {
-      echo ' --- +van+ cache';
-      $attributables = Cache::get('neon-attr-'.Str::slug(self::class));
-    }
-    else
+    if (!Cache::has('neon-attr-'.Str::slug(self::class)))
     {
       echo ' --- nincs cache';
-      $attributables = Attribute::where('class', '=', self::class)->get();
-
-      Cache::tags('neon-attributes')
-        ->put('neon-attr-'.Str::slug(self::class), $attributables);
+      
+      Cache::tags(['neon-attributes'])
+        ->put(
+          'neon-attr-'.Str::slug(self::class),
+          Attribute::where('class', '=', self::class)->get(),
+          now()->addHours(1)
+        );
     }
+
+    $attributables = Cache::get('neon-attr-'.Str::slug(self::class));
 
     /**
      * @todo Caching. Cache can store the result, and very easily could be
