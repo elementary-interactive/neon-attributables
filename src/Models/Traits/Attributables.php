@@ -63,9 +63,9 @@ trait Attributables
         echo 'neon-aval-'.$model->id. ' --- nincs cache';
         // Cache::tags(['neon-attributes'])
         //   ->
-        Cache::put('neon-aval-'.$model->id, $model->attributeValues, now()->addMinutes(5));
+        Cache::put('neon-aval-'.$model->id, serialize($model->attributeValues), now()->addMinutes(5));
 
-          dd($model->attributeValues, Cache::get('neon-aval-'.$model->id));
+          dd($model->attributeValues, unserialize(Cache::get('neon-aval-'.$model->id)));
       }
       
       $attributeValues = Cache::get('neon-aval-'.$model->id);
