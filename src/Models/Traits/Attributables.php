@@ -58,14 +58,13 @@ trait Attributables
     });
 
     static::retrieved(function ($model) {
-      echo 'retrieved';
       if (!Cache::has('neon-aval-'.$model->id)) {
-        echo 'neon-aval-'.$model->id. ' --- nincs cache';
-        // Cache::tags(['neon-attributes'])
-        //   ->
-        Cache::add('neon-aval-'.$model->id, $model->attributeValues, now()->addMinutes(5));
-
-          dd($model->attributeValues, Cache::get('neon-aval-'.$model->id));
+        Cache::tags(['neon-attributes'])
+          ->add(
+              'neon-aval-'.$model->id,
+              $model->attributeValues,
+              now()->addMinutes(2)
+            );
       }
       
       $attributeValues = Cache::get('neon-aval-'.$model->id);
@@ -79,18 +78,14 @@ trait Attributables
 
   protected function initializeAttributable()
   {
-    echo 'neon-attr-'.Str::slug(self::class);
     if (!Cache::has('neon-attr-'.Str::slug(self::class)))
     {
-      echo ' --- nincs cache';
-      
-      // Cache::tags(['neon-attributes'])
-      //   ->
-      Cache::add(
-          'neon-attr-'.Str::slug(self::class),
-          Attribute::where('class', '=', self::class)->get(),
-          now()->addHours(1)
-        );
+      Cache::tags(['neon-attributes'])
+        ->add(
+            'neon-attr-'.Str::slug(self::class),
+            Attribute::where('class', '=', self::class)->get(),
+            now()->addMinutes(2)
+          );
     }
 
     $attributables = Cache::get('neon-attr-'.Str::slug(self::class));

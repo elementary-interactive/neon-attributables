@@ -16,7 +16,7 @@ class AttributablesClearCommand extends Command
 
   public final function handle()
   {
-    Cache::tags('neon-attributes')
+    Cache::tags(['neon-attributes'])
       ->flush();
   }
 }
