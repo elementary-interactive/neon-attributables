@@ -63,7 +63,10 @@ trait Attributables
           ->remember('neon-aval-'.$model->id, now()->addMinutes(5), function() use ($model) {
             return $model->attributeValues;
           });
+      } else {
+        $attributeValues = Cache::get('neon-aval-'.$model->id);
       }
+      
       foreach ($attributeValues as $attributeValue)
       {
         $model->setAttribute($attributeValue->attribute->slug, $attributeValue->value);
