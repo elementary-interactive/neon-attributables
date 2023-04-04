@@ -11,7 +11,7 @@ composer require neon/attributable
 ```
 Then you should install database migrations by:
 ```bash
-php artisan vendor:publish --provider=\"Neon\\Attributable\\NeonAttributableerviceProvider\"
+php artisan vendor:publish --provider=\"Neon\\Attributable\\NeonAttributableServiceProvider\"
 ```
 
 ## Usage
