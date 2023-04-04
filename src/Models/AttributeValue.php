@@ -1,6 +1,6 @@
 <?php
 
-namespace Neon\Attributables\Models;
+namespace Neon\Attributable\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -32,7 +32,7 @@ class AttributeValue extends EloquentModel
   /** */
   public function attribute()
   {
-    return $this->belongsTo(\Neon\Attributables\Models\Attribute::class);
+    return $this->belongsTo(\Neon\Attributable\Models\Attribute::class);
   }
 
   public function attributable()

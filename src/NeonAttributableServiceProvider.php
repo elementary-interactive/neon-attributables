@@ -1,10 +1,10 @@
 <?php
 
-namespace Neon\Attributables;
+namespace Neon\Attributable;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
-use Neon\Attributables\Console\AttributablesClearCommand;
+use Neon\Attributable\Console\AttributableClearCommand;
 
 class NeonAttributableServiceProvider extends ServiceProvider
 {
@@ -26,8 +26,8 @@ class NeonAttributableServiceProvider extends ServiceProvider
       ], 'migrations');
 
       $this->commands([
-        AttributablesClearCommand::class
+        AttributableClearCommand::class
       ]);
-    }
+    }  
   }
 }
