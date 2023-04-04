@@ -1,19 +1,21 @@
 <?php
 
-namespace Neon\Attributables\Models\Traits;
+namespace Neon\Attributable\Models\Traits;
 
-use Neon\Attributables\Models\Attribute;
-use Neon\Attributables\Models\AttributeValue;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Neon\Attributable\Models\Attribute;
+use Neon\Attributable\Models\AttributeValue;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Str;
+
 
 /** 
  
  * 
  * @author: Balázs Ercsey <balazs.ercsey@elementary-interactive.com>
  */
-trait Attributables
+trait Attributable
 {
-  protected $attributables = [];
+  protected $attributable = [];
 
   protected $attributable_records = [];
 
@@ -28,7 +30,7 @@ trait Attributables
     static::saving(function ($model) {
       $model->attributeValues()->delete();
 
-      foreach ($model->attributables as $key => $attribute)
+      foreach ($model->attributable as $key => $attribute)
       {
 
         $value = new AttributeValue([
@@ -55,7 +57,18 @@ trait Attributables
     });
 
     static::retrieved(function ($model) {
-      foreach ($model->attributeValues as $attributeValue)
+      if (!Cache::tags(['neon-attributes'])->has('neon-aval-'.$model->id)) {
+        Cache::tags(['neon-attributes'])
+          ->put(
+              'neon-aval-'.$model->id,
+              $model->attributeValues,
+              now()->addMinutes(2)
+            );
+      }
+      
+      $attributeValues = Cache::tags(['neon-attributes'])->get('neon-aval-'.$model->id) ?? $model->attributeValues;
+      
+      foreach ($attributeValues as $attributeValue)
       {
         $model->setAttribute($attributeValue->attribute->slug, $attributeValue->value);
       }
@@ -64,7 +77,19 @@ trait Attributables
 
   protected function initializeAttributable()
   {
-    $attributables = Attribute::where('class', '=', self::class)->get();
+    $attributable = Attribute::where('class', '=', self::class)->get();
+
+    if (!Cache::tags(['neon-attributes'])->has('neon-attr-'.Str::slug(self::class)))
+    {
+      Cache::tags(['neon-attributes'])
+        ->put(
+            'neon-attr-'.Str::slug(self::class),
+            Attribute::where('class', '=', self::class)->get(),
+            now()->addMinutes(2)
+          );
+    }
+
+    $attributable = Cache::tags(['neon-attributes'])->get('neon-attr-'.Str::slug(self::class));
 
     /**
      * @todo Caching. Cache can store the result, and very easily could be
@@ -72,9 +97,9 @@ trait Attributables
      * given class.
      */
 
-    foreach ($attributables as $attribute)
+    foreach ($attributable as $attribute)
     {
-      $this->attributables[$attribute->slug] = [
+      $this->attributable[$attribute->slug] = [
         'cast_as' => $attribute->cast_as,
         'rules'   => $attribute->rules,
         'field'   => $attribute->field,
