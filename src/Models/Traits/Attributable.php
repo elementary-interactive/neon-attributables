@@ -4,7 +4,9 @@ namespace Neon\Attributable\Models\Traits;
 
 use Neon\Attributable\Models\Attribute;
 use Neon\Attributable\Models\AttributeValue;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Str;
+
 
 /** 
  
@@ -55,7 +57,18 @@ trait Attributable
     });
 
     static::retrieved(function ($model) {
-      foreach ($model->attributeValues as $attributeValue)
+      if (!Cache::tags(['neon-attributes'])->has('neon-aval-'.$model->id)) {
+        Cache::tags(['neon-attributes'])
+          ->put(
+              'neon-aval-'.$model->id,
+              $model->attributeValues,
+              now()->addMinutes(2)
+            );
+      }
+      
+      $attributeValues = Cache::tags(['neon-attributes'])->get('neon-aval-'.$model->id) ?? $model->attributeValues;
+      
+      foreach ($attributeValues as $attributeValue)
       {
         $model->setAttribute($attributeValue->attribute->slug, $attributeValue->value);
       }
@@ -64,9 +77,8 @@ trait Attributable
 
   protected function initializeAttributable()
   {
-<<<<<<< Updated upstream:src/Models/Traits/Attributables.php
-    $attributables = Attribute::where('class', '=', self::class)->get();
-=======
+    $attributable = Attribute::where('class', '=', self::class)->get();
+
     if (!Cache::tags(['neon-attributes'])->has('neon-attr-'.Str::slug(self::class)))
     {
       Cache::tags(['neon-attributes'])
@@ -78,7 +90,6 @@ trait Attributable
     }
 
     $attributable = Cache::tags(['neon-attributes'])->get('neon-attr-'.Str::slug(self::class));
->>>>>>> Stashed changes:src/Models/Traits/Attributable.php
 
     /**
      * @todo Caching. Cache can store the result, and very easily could be
