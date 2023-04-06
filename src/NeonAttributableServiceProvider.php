@@ -21,8 +21,8 @@ class NeonAttributableServiceProvider extends ServiceProvider
       /** Export migrations.
        */
       $this->publishes([
-        __DIR__ . '/../database/migrations/create_attributes_table.php.stub'        => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_attributes_table.php'),
-        __DIR__ . '/../database/migrations/create_attribute_values_table.php.stub'  => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_attribute_values_table.php'),
+        __DIR__ . '/../database/migrations/create_attributes_table.php.stub'        => database_path('migrations/' . date('Y_m_d_Hi00', time()) . '_create_attributes_table.php'),
+        __DIR__ . '/../database/migrations/create_attribute_values_table.php.stub'  => database_path('migrations/' . date('Y_m_d_Hi01', time()) . '_create_attribute_values_table.php'),
       ], 'migrations');
 
       $this->commands([
