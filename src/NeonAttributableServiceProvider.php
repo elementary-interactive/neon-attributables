@@ -17,6 +17,12 @@ class NeonAttributableServiceProvider extends ServiceProvider
   public function boot(Kernel $kernel): void
   {
     if ($this->app->runningInConsole()) {
+
+      /** Export config.
+       */
+      $this->publishes([
+        __DIR__.'/../config/config_attributable.php'   => config_path('attributable.php'),
+      ], 'neon-attributable');
       
       /** Export migrations.
        */
