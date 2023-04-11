@@ -12,11 +12,19 @@ class AttributableClearCommand extends Command
    */
   protected $signature = 'attributes:clear';
 
-  protected $description = 'Clear Neon\' attributes cache.';
+  protected $description = 'Clear Neon Attributable\'s attributes cache.';
 
   public final function handle()
   {
-    Cache::tags(['neon-attributes'])
-      ->flush();
+    if (config('attributable.cache'))
+    {
+      Cache::tags(['neon-attributes'])
+        ->flush();
+      $this->info('Cache flushed.');
+    }
+    else
+    {
+      $this->warn('Cache is turned off by the configuration.');
+    }
   }
 }
