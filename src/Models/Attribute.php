@@ -31,7 +31,10 @@ class Attribute extends EloquentModel
       /**
        * Clean up cache.
        */
-      Artisan::call('attributes:clear');
+      if (config('attributable.cache'))
+      {
+        Artisan::call('attributes:clear');
+      }
     });
   }
 
