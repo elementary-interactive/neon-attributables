@@ -21,7 +21,7 @@ trait Attributable
 
   /** Extending the boot, to ...
    */
-  protected static function boot()
+  protected static function bootAttributable()
   {
     /** We MUST call the parent boot...
      */
@@ -77,14 +77,14 @@ trait Attributable
 
   protected function initializeAttributable()
   {
-    $attributable = Attribute::where('class', '=', self::class)->get();
+    $attributable = Attribute::where('class', 'like', addslashes(self::class))->get();
 
     if (config('attributable.cache') && !Cache::tags(['neon-attributes'])->has('neon-attr-'.Str::slug(self::class)))
     {
       Cache::tags(['neon-attributes'])
         ->put(
             'neon-attr-'.Str::slug(self::class),
-            Attribute::where('class', '=', self::class)->get(),
+            Attribute::where('class', 'like', addslashes(self::class))->get(),
             now()->addMinutes(2)
           );
     }
@@ -99,7 +99,6 @@ trait Attributable
      * re-generated if the attributes created or updated related to the 
      * given class.
      */
-
     foreach ($attributable as $attribute)
     {
       $this->attributable[$attribute->slug] = [
