@@ -21,11 +21,8 @@ trait Attributable
 
   /** Extending the boot, to ...
    */
-  protected static function bootAttributable()
+  public static function bootAttributable()
   {
-    /** We MUST call the parent boot...
-     */
-    parent::boot();
 
     static::saving(function ($model) {
       $model->attributeValues()->delete();
@@ -56,7 +53,7 @@ trait Attributable
       }
     });
 
-    static::retrieved(function ($model) {
+    static::created(function ($model) {
       if (config('attributable.cache') && !Cache::tags(['neon-attributes'])->has('neon-aval-'.$model->id)) {
         Cache::tags(['neon-attributes'])
           ->put(
