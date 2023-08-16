@@ -53,7 +53,7 @@ trait Attributable
       }
     });
 
-    static::created(function ($model) {
+    static::retrieved(function ($model) {
       if (config('attributable.cache') && !Cache::tags(['neon-attributes'])->has('neon-aval-'.$model->id)) {
         Cache::tags(['neon-attributes'])
           ->put(
