@@ -29,14 +29,16 @@ trait Attributable
 
       foreach ($model->attributable as $key => $attribute)
       {
+        if (array_key_exists($key, $model->attributes))
+        {
+          $value = new AttributeValue([
+            'value'     => $model->attributes[$key],
+          ]);
 
-        $value = new AttributeValue([
-          'value'     => $model->attributes[$key],
-        ]);
-        
-        $model->attributable_records[] = Attribute::find($attribute['id'])->values()->save($value);
-        
-        unset($model->attributes[$key]);
+          $model->attributable_records[] = Attribute::find($attribute['id'])->values()->save($value);
+          
+          unset($model->attributes[$key]);
+        }
       }
     });
 
