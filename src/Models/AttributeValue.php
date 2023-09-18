@@ -28,11 +28,11 @@ class AttributeValue extends EloquentModel
    * @var array
    */
   protected $casts = [
-    'created_at'    => 'date',
-    'updated_at'    => 'date',
-    'deleted_at'    => 'date',
-    'published_at'  => 'date',
-    'expired_at'    => 'date',
+    'created_at'    => 'datetime',
+    'updated_at'    => 'datetime',
+    'deleted_at'    => 'datetime',
+    'published_at'  => 'datetime',
+    'expired_at'    => 'datetime',
   ];
 
   /** */

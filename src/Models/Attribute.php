@@ -23,9 +23,9 @@ class Attribute extends EloquentModel
 
   protected $casts = [
     'parameters' => 'json',
-    'created_at' => 'date',
-    'updated_at' => 'date',
-    'deleted_at' => 'date'
+    'created_at' => 'datetime',
+    'updated_at' => 'datetime',
+    'deleted_at' => 'datetime'
   ];
 
   protected static function boot()
