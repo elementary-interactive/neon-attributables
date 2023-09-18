@@ -5,7 +5,7 @@ namespace Neon\Attributable\Models\Traits;
 use Neon\Attributable\Models\Attribute;
 use Neon\Attributable\Models\AttributeValue;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Str;
+use Illuminate\Support\Str;
 
 
 /** 
