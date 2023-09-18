@@ -19,18 +19,29 @@ return [
    */
   'cache' => env('NEON_ATTRIBUTABLE_CACHE', false),
 
+  /**
+   * @todo Remove translated strings! (Together with Filament PHP)
+   */
   'scopes' => [
     Site::class => 'Weboldal',
     Link::class => 'Oldal',
     Menu::class => 'Menü'
   ],
+
+  /**
+   * @todo Remove translated strings! (Together with Filament PHP)
+   */
   'fields' => [
       'Text'  => 'Szöveges beviteli mező'
   ],
+
+  /**
+   * @todo Remove translated strings! (Together with Filament PHP)
+   */
   'casts' => [
-    'string'  => 'casts.string',
-    'int'     => 'casts.int',
-    'boolean' => 'casts.boolean'
+    'string'  => 'Szöveg',
+    'int'     => 'Egész szám',
+    'boolean' => 'Logikai (I/H)'
   ]
 
 ];
