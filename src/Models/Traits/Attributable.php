@@ -82,7 +82,7 @@ trait Attributable
       //-- Store cache ---------------------------------------------------------
       Cache::put(
         'neon-attributable-' . Str::slug(self::class),
-        Attribute::where('class', 'like', addslashes(self::class))->get(),
+        Attribute::where('class', self::getMorphClass())->get(),
         now()->addMinutes(5)
       );
     }
@@ -94,7 +94,7 @@ trait Attributable
     if (config('attributable.cache') && Cache::has('neon-attributable-' . Str::slug(self::class))) {
       $attributable = Cache::get('neon-attributable-' . Str::slug(self::class));
     } else {
-      $attributable = Attribute::where('class', 'like', addslashes(self::class))->get();
+      $attributable = Attribute::where('class', self::getMorphClass())->get();
     }
 
     /**

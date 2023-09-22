@@ -1,9 +1,5 @@
 <?php
 
-use Neon\Models\Link;
-use Neon\Models\Menu;
-use Neon\Site\Models\Site;
-
 return [
 
   /** IMPORTANT!!!
@@ -23,9 +19,9 @@ return [
    * @todo Remove translated strings! (Together with Filament PHP)
    */
   'scopes' => [
-    Site::class => 'Weboldal',
-    Link::class => 'Oldal',
-    Menu::class => 'Menü'
+    'site' => 'Weboldal',
+    'link' => 'Oldal',
+    'menu' => 'Menü'
   ],
 
   /**

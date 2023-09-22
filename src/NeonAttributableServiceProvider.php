@@ -2,8 +2,10 @@
 
 namespace Neon\Attributable;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Foundation\Console\AboutCommand;
+use Illuminate\Support\ServiceProvider;
 use Neon\Attributable\Console\AttributableClearCommand;
 
 class NeonAttributableServiceProvider extends ServiceProvider
@@ -16,14 +18,22 @@ class NeonAttributableServiceProvider extends ServiceProvider
    */
   public function boot(Kernel $kernel): void
   {
+    AboutCommand::add('Neon Attributable', fn () => ['Version' => '2.0.0-alpha-7']);
+
+    Relation::enforceMorphMap([
+      'site' => Neon\Site\Models\Site::class,
+      'menu' => Neon\Models\Menu::class,
+      'link' => Neon\Models\Link::class
+    ]);
+    
     if ($this->app->runningInConsole()) {
 
       /** Export config.
        */
       $this->publishes([
-        __DIR__.'/../config/config_attributable.php'   => config_path('attributable.php'),
+        __DIR__ . '/../config/config_attributable.php'   => config_path('attributable.php'),
       ], 'neon-configs');
-      
+
       /** Export migrations.
        */
       if (!class_exists('CreateAttributesTable')) {
@@ -43,6 +53,6 @@ class NeonAttributableServiceProvider extends ServiceProvider
       $this->commands([
         AttributableClearCommand::class
       ]);
-    }  
+    }
   }
 }
