@@ -65,7 +65,7 @@ trait Attributable
           );
       }
 
-      $attributeValues = (config('attributable.cache') && Cache::has('neon-attributable-value-' . $model->id)) ? Cache::get('neon-attributable-value-' . $model->id) : $model->attributeValues->get();
+      $attributeValues = (config('attributable.cache') && Cache::has('neon-attributable-value-' . $model->id)) ? Cache::get('neon-attributable-value-' . $model->id) : $model->attributeValues()->get();
 
       foreach ($attributeValues as $attributeValue) {
         $model->setAttribute($attributeValue->attribute->slug, $attributeValue->value);
