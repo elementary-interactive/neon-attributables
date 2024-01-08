@@ -17,15 +17,23 @@ class Attribute extends EloquentModel
    *
    * @var array
    */
-  protected $dates = [
-    
+  protected $dates = [];
+
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'class', 'name', 'slug', 'field', 'cast_as', 'rules', 'parameters'
   ];
 
   protected $casts = [
-    'parameters' => 'json',
-    'created_at' => 'datetime',
-    'updated_at' => 'datetime',
-    'deleted_at' => 'datetime'
+    'parameters'  => 'json',
+    'rules'       => 'array',
+    'created_at'  => 'datetime',
+    'updated_at'  => 'datetime',
+    'deleted_at'  => 'datetime'
   ];
 
   protected static function boot()
