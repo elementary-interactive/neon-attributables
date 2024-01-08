@@ -94,7 +94,7 @@ trait Attributable
     if (config('attributable.cache') && Cache::has('neon-attributable-' . Str::slug(self::class))) {
       $attributable = Cache::get('neon-attributable-' . Str::slug(self::class));
     } else {
-      $attributable = Attribute::where('class', self::getMorphClass())->get();
+      $attributable = Attribute::where('class', self::class)->get();
     }
 
     /**
@@ -114,6 +114,10 @@ trait Attributable
       /** Set attribute casting.
        */
       $this->casts[$attribute->slug]      = $attribute->cast_as;
+
+      /** Set attibute mass update possibility.
+       */
+      $this->fillable[]                   = $attribute->slug;
 
       /** Fill attributes with empty value.
        */
