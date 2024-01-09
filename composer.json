@@ -1,7 +1,7 @@
 {
   "name": "neon/attributable",
   "description": "Neon Attributable solution to store options separated from the object itself, but dinamically expandable.",
-  "version": "2.0.0-alpha-7",
+  "version": "3.0.0-alpha-1",
   "type": "library",
   "license": "MIT",
   "support": {
@@ -36,19 +36,6 @@
     "laravel/framework": "^10.0",
     "neon/model-uuid": "^1.0",
     "neon/model-publishable": "^1.0"
-  },
-  "require-dev": {
-    "laravel/pint": "^1.0",
-    "nunomaduro/collision": "^7.8",
-    "larastan/larastan": "^2.0.1",
-    "orchestra/testbench": "^8.8",
-    "pestphp/pest": "^2.20",
-    "pestphp/pest-plugin-arch": "^2.0",
-    "pestphp/pest-plugin-laravel": "^2.0",
-    "phpstan/extension-installer": "^1.1",
-    "phpstan/phpstan-deprecation-rules": "^1.0",
-    "phpstan/phpstan-phpunit": "^1.0",
-    "spatie/laravel-ray": "^1.26"
   },
   "repositories": [],
   "branch-alias": {}
