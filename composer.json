@@ -1,7 +1,7 @@
 {
   "name": "neon/attributable",
   "description": "Neon Attributable solution to store options separated from the object itself, but dinamically expandable.",
-  "version": "3.0.0-alpha-2",
+  "version": "3.0.0-alpha-3",
   "type": "library",
   "license": "MIT",
   "support": {

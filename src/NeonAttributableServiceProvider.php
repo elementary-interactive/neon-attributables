@@ -12,11 +12,11 @@ use Spatie\LaravelPackageTools\Package;
 
 class NeonAttributableServiceProvider extends PackageServiceProvider
 {
-  const VERSION = '3.0.0';
+  const VERSION = '3.0.0-alpha-3';
 
   public function configurePackage(Package $package): void
   {
-    AboutCommand::add('Neon', 'Attributable', self::VERSION);
+    AboutCommand::add('N30N', 'Attributable', self::VERSION);
 
     $package
       ->name('neon-attributable')
