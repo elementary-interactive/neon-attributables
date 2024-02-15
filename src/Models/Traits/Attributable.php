@@ -121,7 +121,11 @@ trait Attributable
 
       /** Fill attributes with empty value.
        */
-      $this->setAttribute($attribute->slug, null);
+      if (!array_key_exists($attribute->slug, $this->attributes))
+      {
+        $this->attributes[$attribute->slug] = null;
+      }
+      
     };
   }
 

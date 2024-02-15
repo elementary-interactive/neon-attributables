@@ -12,7 +12,7 @@ use Spatie\LaravelPackageTools\Package;
 
 class NeonAttributableServiceProvider extends PackageServiceProvider
 {
-  const VERSION = '3.0.0-alpha-3';
+  const VERSION = '3.0.0-alpha-4';
 
   public function configurePackage(Package $package): void
   {
