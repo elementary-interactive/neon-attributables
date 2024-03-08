@@ -1,7 +1,7 @@
 {
   "name": "neon/attributable",
   "description": "Neon Attributable solution to store options separated from the object itself, but dinamically expandable.",
-  "version": "3.0.0-alpha-4",
+  "version": "3.0.0-alpha-5",
   "type": "library",
   "license": "MIT",
   "support": {
@@ -16,7 +16,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "Neon\\Attributable\\": "src/"
+      "Neon\\Attributable\\": "src/",
+      "Neon\\Admin\\": "admin/"
     }
   },
   "autoload-dev": {
