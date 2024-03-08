@@ -2,6 +2,7 @@
 
 namespace Neon\Admin\Resources;
 
+use Camya\Filament\Forms\Components\TitleWithSlugInput;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Hidden;
@@ -74,21 +75,29 @@ class AttributeResource extends Resource
             return $array;
           })
           ->columns(2),
-        Fieldset::make(__('neon-admin::admin.resources.attributables.form.fieldset.name'))
-          ->schema([
-            TextInput::make('name')
-              ->label(__('neon-admin::admin.resources.attributables.form.fields.name.label'))
-              ->required()
-              ->maxLength(255),
-            TextInput::make('slug')
-              ->label(__('neon-admin::admin.resources.attributables.form.fields.slug.label'))
-              ->required()
-              ->maxLength(255),
-            Hidden::make('is_slug_changed_manually')
-              ->default(false)
-              ->dehydrated(false),
-          ])
-          ->columns(2),
+        // Fieldset::make(__('neon-admin::admin.resources.attributables.form.fieldset.name'))
+        //   ->schema([
+        //     TextInput::make('name')
+        //       ->label()
+        //       ->required()
+        //       ->maxLength(255),
+        //     TextInput::make('slug')
+        //       ->label()
+        //       ->required()
+        //       ->maxLength(255)
+        //       ->alphaDash(),
+        //     Hidden::make('is_slug_changed_manually')
+        //       ->default(false)
+        //       ->dehydrated(false),
+        //   ])
+        //   ->columns(2),
+        TitleWithSlugInput::make(
+          fieldTitle: 'name',
+          titleLabel: __('neon-admin::admin.resources.attributables.form.fields.name.label'),
+          fieldSlug: 'slug',
+          slugLabel: __('neon-admin::admin.resources.attributables.form.fields.slug.label'),
+          urlHostVisible: false
+        ),
         Select::make('cast_as')
           ->label(__('neon-admin::admin.resources.attributables.form.fields.cast_as.label'))
           ->searchable()
