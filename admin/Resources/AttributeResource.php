@@ -57,9 +57,18 @@ class AttributeResource extends Resource
         Select::make('class')
           ->label(__('neon-admin::admin.resources.attributables.form.fields.class.label'))
           ->native(false)
-          ->options(function () {
-            $array = [];
-            $resources = app('filament')->getResources();
+          ->options(function ():array {
+
+            /**
+             * @var array $result Return result of the Closure.
+             */
+            $result     = [];
+
+            /**
+             * @var Iterable $resources All the registered Filament resources.
+             */
+            $resources  = app('filament')->getResources();
+            
             foreach ($resources as $resource)
             {
               /** Create the resource, to get the related model.
@@ -69,12 +78,11 @@ class AttributeResource extends Resource
               /** If getting  */
               if (in_array('Neon\Attributable\Models\Traits\Attributable', class_uses_recursive($_r->getModel())))
               {
-                $array[$_r->getModel()] = $_r::getNavigationLabel();
+                $result[$_r->getModel()] = $_r::getNavigationLabel();
               }
             }
-            return $array;
-          })
-          ->columns(2),
+            return $result;
+          }),
         // Fieldset::make(__('neon-admin::admin.resources.attributables.form.fieldset.name'))
         //   ->schema([
         //     TextInput::make('name')
@@ -96,7 +104,8 @@ class AttributeResource extends Resource
           titleLabel: __('neon-admin::admin.resources.attributables.form.fields.name.label'),
           fieldSlug: 'slug',
           slugLabel: __('neon-admin::admin.resources.attributables.form.fields.slug.label'),
-          urlHostVisible: false
+          urlHostVisible: false,
+          urlVisitLinkVisible: false
         ),
         Select::make('cast_as')
           ->label(__('neon-admin::admin.resources.attributables.form.fields.cast_as.label'))
@@ -115,7 +124,7 @@ class AttributeResource extends Resource
           ->native(false)
           ->options([
             'text'    => __('neon-admin::admin.resources.attributables.form.fields.field.options.text'),
-            'boolen'  => __('neon-admin::admin.resources.attributables.form.fields.field.options.boolean')
+            'boolean' => __('neon-admin::admin.resources.attributables.form.fields.field.options.boolean')
           ]),
         Select::make('rules')
           ->label(__('neon-admin::admin.resources.attributables.form.fields.rules.label'))
