@@ -65,6 +65,9 @@ trait Attributable
           );
       }
 
+      /** Getting valid attribute values for the given record.
+       * @var Collection $attributeValues
+       */
       $attributeValues = (config('attributable.cache') && Cache::has('neon-attributable-value-' . $model->id)) ? Cache::get('neon-attributable-value-' . $model->id) : $model->attributeValues()->get();
 
       foreach ($attributeValues as $attributeValue) {
@@ -125,7 +128,6 @@ trait Attributable
       {
         $this->attributes[$attribute->slug] = null;
       }
-      
     };
   }
 

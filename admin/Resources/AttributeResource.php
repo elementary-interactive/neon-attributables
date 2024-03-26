@@ -101,11 +101,13 @@ class AttributeResource extends Resource
         //   ->columns(2),
         TitleWithSlugInput::make(
           fieldTitle: 'name',
-          titleLabel: __('neon-admin::admin.resources.attributables.form.fields.name.label'),
           fieldSlug: 'slug',
-          slugLabel: __('neon-admin::admin.resources.attributables.form.fields.slug.label'),
+          titleLabel: __('neon-admin::admin.resources.attributables.form.fields.name.label'),
+          slugLabel: '',
+          urlPath: '',
           urlHostVisible: false,
-          urlVisitLinkVisible: false
+          urlVisitLinkVisible: false,
+          slugSlugifier: fn ($string) => preg_replace( '/-/i', '_', Str::slug($string)),
         ),
         Select::make('cast_as')
           ->label(__('neon-admin::admin.resources.attributables.form.fields.cast_as.label'))
