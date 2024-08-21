@@ -142,7 +142,7 @@ class AttributeResource extends Resource
             'ascii'     => __('neon-admin::admin.resources.attributables.form.fields.rules.options.ascii'), // 'Csak ASCII karakterek'
             'tel'       => __('neon-admin::admin.resources.attributables.form.fields.rules.options.tel')
           ]),
-        KeyValue::make('params')
+        KeyValue::make('parameters')
           ->label(__('neon-admin::admin.resources.attributables.form.fields.params.label'))
       ]);
   }
