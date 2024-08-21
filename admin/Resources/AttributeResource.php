@@ -126,7 +126,8 @@ class AttributeResource extends Resource
           ->native(false)
           ->options([
             'text'    => __('neon-admin::admin.resources.attributables.form.fields.field.options.text'),
-            'boolean' => __('neon-admin::admin.resources.attributables.form.fields.field.options.boolean')
+            'boolean' => __('neon-admin::admin.resources.attributables.form.fields.field.options.boolean'),
+            'text'    => __('neon-admin::admin.resources.attributables.form.fields.field.options.select'),
           ]),
         Select::make('rules')
           ->label(__('neon-admin::admin.resources.attributables.form.fields.rules.label'))
