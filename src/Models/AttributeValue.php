@@ -4,12 +4,14 @@ namespace Neon\Attributable\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Neon\Models\Traits\Publishable;
 
 use Neon\Models\Traits\Uuid;
 
 class AttributeValue extends EloquentModel
 {
   use SoftDeletes;
+  use Publishable;
   use Uuid;
 
   /**
@@ -25,8 +27,12 @@ class AttributeValue extends EloquentModel
    *
    * @var array
    */
-  protected $dates = [
-    'created_at', 'updated_at', 'deleted_at',
+  protected $casts = [
+    'created_at'    => 'datetime',
+    'updated_at'    => 'datetime',
+    'deleted_at'    => 'datetime',
+    'published_at'  => 'datetime',
+    'expired_at'    => 'datetime',
   ];
 
   /** */
@@ -37,7 +43,7 @@ class AttributeValue extends EloquentModel
 
   public function attributable()
   {
-    return $this->morphTo();
+    return $this->morphTo('attributable');
   }
 
   public function getValueAttribute()

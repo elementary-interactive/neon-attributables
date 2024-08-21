@@ -2,38 +2,26 @@
 
 namespace Neon\Attributable;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Foundation\Console\AboutCommand;
+use Illuminate\Support\ServiceProvider;
 use Neon\Attributable\Console\AttributableClearCommand;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Spatie\LaravelPackageTools\Package;
 
-class NeonAttributableServiceProvider extends ServiceProvider
+class NeonAttributableServiceProvider extends PackageServiceProvider
 {
-  /** Bootstrap any application services.
-   *
-   * @param \Illuminate\Contracts\Http\Kernel  $kernel
-   *
-   * @return void
-   */
-  public function boot(Kernel $kernel): void
+  const VERSION = '3.0.0-alpha-6';
+
+  public function configurePackage(Package $package): void
   {
-    if ($this->app->runningInConsole()) {
+    AboutCommand::add('N30N', 'Attributable', self::VERSION);
 
-      /** Export config.
-       */
-      $this->publishes([
-        __DIR__.'/../config/config_attributable.php'   => config_path('attributable.php'),
-      ], 'neon-attributable');
-      
-      /** Export migrations.
-       */
-      $this->publishes([
-        __DIR__ . '/../database/migrations/create_attributes_table.php.stub'        => database_path('migrations/' . date('Y_m_d_', time()) . '000001_create_attributes_table.php'),
-        __DIR__ . '/../database/migrations/create_attribute_values_table.php.stub'  => database_path('migrations/' . date('Y_m_d_', time()) . '000002_create_attribute_values_table.php'),
-      ], 'migrations');
-
-      $this->commands([
-        AttributableClearCommand::class
-      ]);
-    }  
+    $package
+      ->name('neon-attributable')
+      ->hasConfigFile()
+      ->hasMigrations(['create_attributes_table', 'create_attribute_values_table'])
+      ->hasCommands([AttributableClearCommand::class]);
   }
 }

@@ -1,6 +1,7 @@
 {
   "name": "neon/attributable",
-  "description": "",
+  "description": "Neon Attributable solution to store options separated from the object itself, but dinamically expandable.",
+  "version": "3.0.0-alpha-6",
   "type": "library",
   "license": "MIT",
   "support": {
@@ -15,7 +16,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "Neon\\Attributable\\": "src/"
+      "Neon\\Attributable\\": "src/",
+      "Neon\\Admin\\": "admin/"
     }
   },
   "autoload-dev": {
@@ -31,9 +33,11 @@
     }
   },
   "require": {
-    "php": ">=8.0",
-    "laravel/framework": ">=9.0",
-    "neon/model-uuid": "^1.0"
+    "php": "^8.1",
+    "laravel/framework": "^10.0",
+    "blendbyte/filament-title-with-slug": "1.0.6",
+    "neon/model-uuid": "^1.0",
+    "neon/model-publishable": "^1.0"
   },
   "repositories": [],
   "branch-alias": {}
