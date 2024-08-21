@@ -29,7 +29,7 @@ class Attribute extends EloquentModel
   ];
 
   protected $casts = [
-    'parameters'  => 'json',
+    'parameters'  => 'array',
     'rules'       => 'array',
     'created_at'  => 'datetime',
     'updated_at'  => 'datetime',
